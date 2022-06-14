@@ -193,7 +193,8 @@ let g:python3_host_prog = "C:/Users/rajmo/AppData/Local/Programs/Python/Python39
 "Run Python code by pressing <F5> in insert mode
 "imap <F5> <Esc>:w<CR>:!python % [filename.py]; <CR>
 noremap <silent> <expr> <F6> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ?  "\:NERDTreeFind<CR>" : "\:NERDTree<CR>" 
-nmap <F5> <Esc>:w<CR>:!python %<CR> 
+nmap <F5> <Esc>:w<CR>:!python %<CR>
+nmap <F9> <Esc>:w <CR>:term python %<CR>
 "Telescope remaps
 let mapleader = " "
 "nnoremap <leader>ps : lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
