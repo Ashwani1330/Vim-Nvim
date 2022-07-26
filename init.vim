@@ -186,3 +186,6 @@ noremap <silent> <expr> <F6> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufex
 nmap <F2> <Esc>:w <CR>:Telescope<CR>
 let mapleader = " "
 nnoremap <leader>ps : lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+
+inoremap kj <esc>
+vnoremap kj <esc>
