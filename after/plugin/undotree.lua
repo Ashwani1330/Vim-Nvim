@@ -1,1 +1,1 @@
-vim.keymap.set("n","<F7>", vim.cmd.UndotreeToggle)
+vim.keymap.set("n","<F4>", vim.cmd.UndotreeToggle)

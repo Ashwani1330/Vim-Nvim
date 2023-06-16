@@ -1,12 +1,13 @@
---[[function ColorMyPencils(color)
+function ColorMyPencils(color)
 	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-ColorMyPencils()]]-- 
+ColorMyPencils()
 
+--[[
 local g = vim.g
 local o = vim.o
 
@@ -46,6 +47,7 @@ local o = vim.o
       on_highlights = function(highlights, colors) end,
     })
     
+]]--
 
 --[[
 g.gruvbox_material_disable_italic_comment = 1
@@ -54,7 +56,7 @@ g.gruvbox_material_enable_bold = 1
 g.gruvbox_material_transparent_background = 1
 g.gruvbox_material_foreground = 'mix' 
 g.gruvbox_material_background = 'material'
---]] 
+--]]
 
 --[[
 g.dracula_bold = 1
@@ -66,7 +68,6 @@ g.dracula_inverse = 1
 g.dracula_colorterm = 0
 ]]--
 
-vim.cmd("colorscheme tokyonight")
-
+-- vim.cmd("colorscheme tokyonight")
 -- g.gruvbox_transparent_bg = 1
 

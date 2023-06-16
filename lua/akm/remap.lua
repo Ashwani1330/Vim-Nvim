@@ -43,15 +43,17 @@ vim.keymap.set("n","<F5>", "<Esc>:w <CR>:vs<CR>:term python3 %<CR>")
 vim.keymap.set("n","<F9>", "<Esc>:w <CR>:sp<CR>:term python3 %<CR>")
 
 -- NvimTreeToggle
---vim.keymap.set("n","<F6>", ":NvimTreeToggle<CR>")
+vim.keymap.set("n","<F6>", ":NeoTreeFocusToggle<CR>")
+vim.keymap.set("n","<F7>", ":NeoTreeFloatToggle<CR>")
 
 -- Run C/C++ commands remaps
 vim.keymap.set("n","<F8>", "<Esc>:w <CR>:vs<CR>:term g++ -std=c++20 % -Wall -g -o %.out && ./%.out <CR>")
 vim.keymap.set("n","<F10>", "<Esc>:w <CR>:sp<CR>:term g++ -std=c++20 % -Wall -g -o %.out && ./%.out <CR>")
 
--- Run Kotlin commands remaps
+--[[ Run Kotlin commands remaps
 vim.keymap.set("n","<F3>", "<Esc>:w <CR>:sp<CR>:term kotlinc % -d %<.jar<CR>")
 vim.keymap.set("n","<F6>", "<Esc>:w <CR>:sp<CR>:term java -jar %<.jar<CR>")
+]]--
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- renames
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- makes executables
