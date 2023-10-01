@@ -22,6 +22,7 @@ return require('packer').startup(function(use)
 	})
 
     use ('morhetz/gruvbox')
+    use('rebelot/kanagawa.nvim')
 
     -- everforest
     use ('sainnhe/everforest')
