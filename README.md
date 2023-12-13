@@ -8,6 +8,4 @@ My neovim config files.
 
 Highly inspired by ThePrimeagen neovim config availabe at -> https://github.com/ThePrimeagen/init.lua
 
->Note: The master branch consists of the latest configuration.
-
 Enjoy!
