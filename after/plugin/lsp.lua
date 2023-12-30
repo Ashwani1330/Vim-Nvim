@@ -2,8 +2,17 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'sumneko_lua',
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp.default_setup,
+    lua_ls = function()
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+  },
 })
 
 lsp.set_preferences({
@@ -35,9 +44,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   sign_icons = { }
 }) ]]--
 
-lsp.setup_nvim_cmp({
+--[[ lsp.setup_nvim_cmp({
   mapping = cmp_mappings
-})
+}) ]]--
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
