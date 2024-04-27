@@ -1,7 +1,7 @@
 # Vim-Nvim
 My neovim config files.
 
->Plugin Manager Used: [packer.nvim](https://github.com/wbthomason/packer.nvim)
+>Plugin Manager used: [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ---
 
 ![Screenshot from 2023-12-13 14-09-29](https://github.com/Ashwani1330/Vim-Nvim/assets/84962178/9436e407-25e8-43b2-bea8-ea4fd66696b4)
