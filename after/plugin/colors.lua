@@ -31,20 +31,17 @@ require('kanagawa').setup({
     },
 })
 
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa")
 
 -- ColorMyPencils()
 
---[[
 local g = vim.g
 local o = vim.o
 
     require("tokyonight").setup({
       -- your configuration comes here
       -- or leave it empty to use the default settings
-      style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-      light_style = "night", -- The theme is used when the background is set to light
+      style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+      light_style = "moon", -- The theme is used when the background is set to light
       transparent = true, -- Enable this to disable setting the background color
       terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
       styles = {
@@ -75,8 +72,10 @@ local o = vim.o
       ---@param colors ColorScheme
       on_highlights = function(highlights, colors) end,
     })
-    
-]]--
+
+
+-- setup must be called before loading
+vim.cmd("colorscheme tokyonight")
 
 --[[
 g.gruvbox_material_disable_italic_comment = 1
@@ -103,9 +102,6 @@ This configuration option should be placed before `colorscheme everforest`.
 Available values: 'hard', 'medium'(default), 'soft'
 ]]-- 
 
-local g = vim.g
-local o = vim.o
-
 g.everforest_background = 'hard'
 -- For better performance
 g.everforest_better_performance = 1
@@ -113,4 +109,3 @@ g.everforest_transparent_background = 1
 
 -- vim.cmd("colorscheme everforest")
 -- g.gruvbox_transparent_bg = 1
-
