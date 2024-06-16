@@ -1,7 +1,7 @@
 # Vim-Nvim
 My neovim config files.
 
-⚠️⚠️ Note: The <mark><b>master</b></mark> branch consists of the latest configuration.
+⚠️⚠️ Note: The <a href="https://github.com/Ashwani1330/Vim-Nvim/tree/master"><mark><b>master</b></mark></a> branch consists of the latest configuration.
 
 
 >Plugin Manager used: [packer.nvim](https://github.com/wbthomason/packer.nvim)
