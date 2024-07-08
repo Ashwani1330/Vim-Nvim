@@ -2,17 +2,22 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    lsp.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
+  ensure_installed = {
+      "lua_ls",
+      -- "rust_analyzer", -- Remove this to exclude rust_analyzer
+      "gopls"
   },
+  handlers = {
+      function(server_name) -- default handler (optional)
+          if server_name ~= "rust_analyzer" then
+              require("lspconfig")[server_name].setup {
+                  capabilities = capabilities
+              }
+          end
+      end,
+  }
 })
 
 lsp.set_preferences({
@@ -64,9 +69,7 @@ vim.diagnostic.config({
     },
 })
 
-
---[[
-local cmp = require('cmp')
+--[[ local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -99,7 +102,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-
 lsp.setup()
 
 vim.diagnostic.config({
@@ -110,3 +112,4 @@ vim.diagnostic.config({
   severity_sort = true,
   float = true,
 })
+

@@ -108,4 +108,11 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 }
+
+
+    --rust
+    use ('rust-lang/rust.vim')
+    use ('mrcjkb/rustaceanvim')
+    use ('vadimcn/codelldb')
+
   end)
