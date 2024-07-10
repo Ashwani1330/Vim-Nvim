@@ -27,6 +27,9 @@ return require('packer').startup(function(use)
     -- everforest
     use ('sainnhe/everforest')
 
+    -- iceberg
+    use ('cocopon/iceberg.vim')
+
     use('lewis6991/gitsigns.nvim')
 
 
@@ -72,7 +75,7 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
     use "lukas-reineke/indent-blankline.nvim"
-    use('xiyaowong/transparent.nvim')
+    -- use('xiyaowong/transparent.nvim')
 
     -- flutter && dart
     use('dart-lang/dart-vim-plugin')
@@ -110,7 +113,10 @@ return require('packer').startup(function(use)
 }
 
 
-    --rust
+    -- GitHub theme
+    use ('projekt0n/github-nvim-theme')
+
+    -- rust
     use ('rust-lang/rust.vim')
     use ('mrcjkb/rustaceanvim')
     use ('vadimcn/codelldb')

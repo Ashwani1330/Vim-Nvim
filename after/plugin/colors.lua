@@ -124,4 +124,5 @@ require('rose-pine').setup({
     },
 })
 
-ColorMyPencils()
+-- ColorMyPencils()
+vim.cmd("colorscheme rose-pine")
