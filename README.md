@@ -1,6 +1,9 @@
 # Vim-Nvim
 My neovim config files.
->Plugin Manager used: [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+> Plugin Manager: [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+> LSP Package Manager: [mason.nvim](https://github.com/williamboman/mason.nvim?tab=readme-ov-file)
 ---
 
 ### Screenshots
