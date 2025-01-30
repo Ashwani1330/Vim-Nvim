@@ -103,7 +103,7 @@ g.everforest_background = 'hard'
 g.everforest_better_performance = 1
 g.everforest_transparent_background = 1
 
--- vim.cmd("colorscheme everforest")
+vim.cmd("colorscheme everforest")
 -- g.gruvbox_transparent_bg = 1
 
 require('rose-pine').setup({
@@ -125,4 +125,4 @@ require('rose-pine').setup({
 })
 
 -- ColorMyPencils()
-vim.cmd("colorscheme rose-pine")
+-- vim.cmd("colorscheme rose-pine")
