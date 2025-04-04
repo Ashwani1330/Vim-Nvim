@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
-    use "lukas-reineke/indent-blankline.nvim"
+    use {"lukas-reineke/indent-blankline.nvim", tag = "v2.20.8"}
     -- use('xiyaowong/transparent.nvim')
 
     -- flutter && dart
