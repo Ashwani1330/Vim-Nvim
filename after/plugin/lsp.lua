@@ -1,26 +1,27 @@
 local lsp_zero = require('lsp-zero')
+local navic = require("nvim-navic")
 
 lsp_zero.extend_lspconfig()
 
 -- Mason setup
 require('mason').setup({})
+
 require('mason-lspconfig').setup({
   ensure_installed = {
     'lua_ls',
-    -- 'rust_analyzer', -- Commented out as per original config
+    'jdtls', -- Let mason install it, but custom config below
   },
   handlers = {
     lsp_zero.default_setup,
-    -- Custom handler to exclude rust_analyzer
     function(server_name)
-      if server_name ~= "rust_analyzer" then
+      if server_name ~= "jdtls" and server_name ~= "rust_analyzer" then
         require('lspconfig')[server_name].setup({})
       end
     end,
   }
 })
 
--- Configure completion
+-- CMP setup
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
@@ -44,7 +45,7 @@ cmp.setup({
   })
 })
 
--- Configure diagnostics
+-- Diagnostics
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
@@ -61,17 +62,21 @@ vim.diagnostic.config({
   },
 })
 
--- Set up custom signs
-local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "" }
+-- Diagnostic signs
+local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "" }
+
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  local name = "DiagnosticSign" .. type
+  vim.api.nvim_set_hl(0, name, { default = true, link = "Diagnostic" .. type })
+  vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 end
 
--- Set up keymaps
+-- LSP keymaps
 lsp_zero.on_attach(function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   local opts = {buffer = bufnr, remap = false}
-  
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -83,3 +88,54 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+
+-- (Optional)
+-- JDTLS Setup (Java)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'java',
+  callback = function()
+    -- local jdtls = require('jdtls')
+    local ok, jdtls = pcall(require, 'jdtls')
+    if not ok then return end  -- gracefully exit if jdtls is not available
+
+    local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
+    local workspace_dir = vim.fn.stdpath('data') .. '/site/java/workspace-root/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    local root_markers = {'gradlew', 'mvnw', '.git'}
+    local root_dir = require('jdtls.setup').find_root(root_markers)
+    if root_dir == nil then return end
+
+    jdtls.start_or_attach({
+      cmd = {
+        'java',
+        '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        '-Dosgi.bundles.defaultStartLevel=4',
+        '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        '-Dlog.protocol=true',
+        '-Dlog.level=ALL',
+        '-Xms1g',
+        '--add-modules=ALL-SYSTEM',
+        '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+        '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+        '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
+        '-configuration', jdtls_path .. '/config_linux', -- change if on Windows or macOS
+        '-data', workspace_dir,
+      },
+      root_dir = root_dir,
+      settings = {
+        java = {
+          home = '/usr/lib/jvm/java-17-openjdk', -- Adjust if different
+          format = {
+            enabled = true,
+            settings = {
+              url = vim.fn.stdpath('config') .. '/eclipse-java-google-style.xml',
+              profile = 'GoogleStyle',
+            }
+          }
+        }
+      },
+      init_options = {
+        bundles = {}
+      },
+    })
+  end
+})

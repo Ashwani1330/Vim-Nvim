@@ -8,11 +8,13 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
     use 'folke/tokyonight.nvim'
     use('RRethy/vim-illuminate')
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+
 	use({
 		'rose-pine/neovim',
 		as = 'rose-pine',
@@ -29,6 +31,9 @@ return require('packer').startup(function(use)
 
     -- iceberg
     use ('cocopon/iceberg.vim')
+
+    -- moonfly
+    use ('bluz71/vim-moonfly-colors')
 
     use('lewis6991/gitsigns.nvim')
 
@@ -50,12 +55,20 @@ return require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 
+    use {
+        'mfussenegger/nvim-jdtls',
+        ft = { 'java' }
+    }
+
 
     use {
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"
     }
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'} use 'saadparwaiz1/cmp_luasnip'
+
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+
+    use 'saadparwaiz1/cmp_luasnip'
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 	use('ThePrimeagen/harpoon')
@@ -78,10 +91,9 @@ return require('packer').startup(function(use)
     -- use('xiyaowong/transparent.nvim')
 
     -- flutter && dart
+    --[[
     use('dart-lang/dart-vim-plugin')
     use('thosakwe/vim-flutter')
-    use ('honza/vim-snippets')
-
     use {
         'akinsho/flutter-tools.nvim',
         requires = {
@@ -89,7 +101,9 @@ return require('packer').startup(function(use)
             'stevearc/dressing.nvim', -- optional for vim.ui.select
         },
     }
+        ]]--
 
+    use ('honza/vim-snippets')
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -107,8 +121,10 @@ return require('packer').startup(function(use)
 			{'hrsh7th/cmp-nvim-lua'},
 
 			-- Snippets
-			{'L3MON4D3/LuaSnip'},
-			{'rafamadriz/friendly-snippets'},
+
+            "L3MON4D3/LuaSnip",
+            requires = { "rafamadriz/friendly-snippets" }, -- optional
+            run = "make install_jsregexp"
 		}
 }
 
@@ -121,4 +137,12 @@ return require('packer').startup(function(use)
     use ('mrcjkb/rustaceanvim')
     use ('vadimcn/codelldb')
 
-  end)
+    -- Buffers restiction to tabs (bufferline)
+    use({
+        "tiagovla/scope.nvim",
+        config = function()
+            require("scope").setup({})
+        end,
+    })
+
+end)
