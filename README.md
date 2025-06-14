@@ -8,9 +8,9 @@ My neovim config files.
 
 ### Screenshots
 
-![Wednesday 10 July 2024 09:35:40 PM IST](https://github.com/Ashwani1330/Vim-Nvim/assets/84962178/c46c3426-c027-451c-942f-2c00ba4789b6)
+![image](https://github.com/user-attachments/assets/10935d34-309d-42d2-a60d-52b000048772)
 
-![Wednesday 10 July 2024 09:37:36 PM IST](https://github.com/Ashwani1330/Vim-Nvim/assets/84962178/c2785a08-5533-4b60-ab14-72750e8df61b)
+![image](https://github.com/user-attachments/assets/646cbf92-73f8-4b94-9fb3-010cf346539f)
 
 ---
 Highly inspired by ThePrimeagen neovim config availabe at -> https://github.com/ThePrimeagen/init.lua
