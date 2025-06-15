@@ -65,4 +65,3 @@ vim.api.nvim_create_autocmd("FileType", {
     -- vim.notify("Set Lua indent to 2 spaces for buffer " .. args.buf, vim.log.levels.INFO, {title = "Indent Settings"})
   end,
 })
-

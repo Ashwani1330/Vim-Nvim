@@ -60,7 +60,7 @@ return {
         },
         offsets = {
           {
-            filetype = "neo-tree", -- Updated from NvimTree if you use neo-tree
+            filetype = "NvimTree", -- Updated from NvimTree if you use neo-tree
             text = "File Explorer",
             highlight = "Directory",
             separator = true,
