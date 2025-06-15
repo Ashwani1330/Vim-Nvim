@@ -10,7 +10,8 @@ o.errorbells = false
 o.wrap = false
 o.scrolloff = 8
 o.clipboard = 'unnamedplus'
-o.mouse = 'a'  -- enable mouse o.smartindent = true
+o.mouse = 'a'  -- enable mouse 
+o.smartindent = true
 
 -- Better editor UI
 o.termguicolors = true
@@ -47,4 +48,21 @@ o.foldlevel = 99
 o.updatetime = 50
 
 g.mapleader = " "
+
+-- Autocommands for language-specific settings
+local langSettingsGroup = vim.api.nvim_create_augroup("LanguageSpecificSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = langSettingsGroup,
+  pattern = "lua",
+  callback = function(args)
+    -- For Lua files, set indent to 2 spaces
+    vim.bo[args.buf].shiftwidth = 2
+    vim.bo[args.buf].tabstop = 2
+    vim.bo[args.buf].softtabstop = 2
+    -- expandtab is likely already true globally, but can be set buffer-locally if needed:
+    -- vim.bo[args.buf].expandtab = true 
+    -- vim.notify("Set Lua indent to 2 spaces for buffer " .. args.buf, vim.log.levels.INFO, {title = "Indent Settings"})
+  end,
+})
 
