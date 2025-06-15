@@ -1,5 +1,9 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local g = vim.g
 local o = vim.o
+local fn = vim.fn
 
 -- Better editing experience
 o.tabstop = 4
@@ -34,8 +38,13 @@ o.swapfile = false
 o.backup = false
 -- o.undodir = os.getenv("HOME") .. '/.nvim/undodir'
 o.undofile = true
-o.hidden = true -- It keeps any buffer we have been editing in the background. If we don't save it, we can navigate away from it without saving it. Its still open in the memomry. Allows fast swapping b/w files without worry.
+-- o.hidden = true -- It keeps any buffer we have been editing in the background. If we don't save it, we can navigate away from it without saving it. Its still open in the memomry. Allows fast swapping b/w files without worry.
 o.exrc = true  -- enable automatic sourcing of custom vimrc that one needs in particualar projects
+
+-- Ensure ShaDa path exists and set it
+local shada_path = fn.stdpath("data") .. "/shada"
+fn.mkdir(shada_path, "p")  -- 'p' creates parent dirs if needed
+o.shadafile = shada_path .. "/main.shada"
 
 -- Better buffer splitting
 o.splitright = true
@@ -47,7 +56,7 @@ o.foldlevel = 99
 
 o.updatetime = 50
 
-g.mapleader = " "
+-- g.mapleader = " "
 
 -- Autocommands for language-specific settings
 local langSettingsGroup = vim.api.nvim_create_augroup("LanguageSpecificSettings", { clear = true })
