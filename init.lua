@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath) -- Now lazypath is defined and this line should wo
 -- Load your core settings and remaps BEFORE lazy setup
 require("akm.set")
 require("akm.remap") -- General remaps
+require("akm.neovide")
 
 -- Setup lazy.nvim to load plugin specs from the "lua/plugins" directory
 require("lazy").setup("plugins", {

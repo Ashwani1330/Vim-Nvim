@@ -39,8 +39,8 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") ]]--
 
 -- Run python commands remaps
-vim.keymap.set("n","<F5>", "<Esc>:w <CR>:vs<CR>:term python3 %<CR>")
-vim.keymap.set("n","<F9>", "<Esc>:w <CR>:sp<CR>:term python3 %<CR>")
+vim.keymap.set("n","<F5>", "<Esc>:w <CR>:vs<CR>:term python %<CR>")
+vim.keymap.set("n","<F9>", "<Esc>:w <CR>:sp<CR>:term python %<CR>")
 
 -- NvimTreeToggle
 local opts = { noremap = true, silent = true }
