@@ -1,84 +1,104 @@
 return {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",                 -- Or pin to a specific release tag e.g. "v1.2.3"
-    lazy = false,                  -- Load at startup. You can change this to `cmd = "NvimTreeToggle"`
-    dependencies = {
-        "nvim-tree/nvim-web-devicons", -- For file icons
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  keys = {
+    {
+      "<leader>pv", -- Your keymap to toggle the tree
+      "<cmd>NvimTreeToggle<CR>",
+      desc = "Toggle File Explorer (NvimTree)",
     },
-    config = function()
-        require("nvim-tree").setup({
-            -- Your NvimTree configuration options go here
-            sort_by = "name",
-            view = {
-                width = 30,
-                side = "right",
-                -- To make NvimTree open as a float by default (relevant for your F7 mapping desire):
-                -- float = {
-                --   enable = true,
-                --   open_win_config = {
-                --     relative = "editor",
-                --     border = "rounded",
-                --     width = 40,
-                --     height = 30,
-                --     row = 1,
-                --     col = 1,
-                --   },
-                -- },
-            },
-            renderer = {
-                group_empty = true,
-                icons = {
-                    show = {
-                        file = true,
-                        folder = true,
-                        folder_arrow = true,
-                        git = true,
-                    },
-                    glyphs = {
-                        default = "",
-                        symlink = "",
-                        folder = {
-                            arrow_closed = "",
-                            arrow_open = "",
-                            default = "",
-                            open = "",
-                            empty = "",
-                            empty_open = "",
-                            symlink = "",
-                            symlink_open = "",
-                        },
-                        git = {
-                            unstaged = "✗",
-                            staged = "✓",
-                            unmerged = "",
-                            renamed = "➜",
-                            untracked = "★",
-                            deleted = "🗑",
-                            ignored = "◌",
-                        },
-                    },
-                },
-            },
-            filters = {
-                dotfiles = false, -- Show dotfiles
-                custom = {},
-                exclude = {},
-            },
-            update_focused_file = {
-                enable = true,
-                update_root = false,
+  },
+  config = function()
+    require("nvim-tree").setup({
+      sort_by = "name",
+      -- OPTIMIZED: Respect .gitignore and filter out Unity's generated files/folders
+      filters = {
+        dotfiles = false, -- Keep this if you want to see files like .gitignore
+        custom = {
+          -- This is the most important part for Unity projects
+          "\\.meta$", -- Hide .meta files
+          "Library/",
+          "Temp/",
+          "Logs/",
+          "obj/",
+          "Build/",
+          "Builds/",
+          "\\.vs/", -- Hide Visual Studio config folder
+          "\\.vscode/", -- Hide VSCode config folder
+          "\\.sln$", -- Hide solution files
+          "\\.csproj$", -- Hide C# project files
+        },
+        exclude = {},
+      },
+      git = {
+        enable = true,
+        -- OPTIMIZED: Set to true to ignore files listed in .gitignore
+        -- This is a huge performance boost for Unity projects
+        ignore = true,
+        timeout = 400,
+      },
+      -- OPTIONAL: Add diagnostic indicators to see errors/warnings in the tree
+      diagnostics = {
+        enable = false,
+        show_on_dirs = true, -- Show diagnostics on folders
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
+      -- The rest of your config is great and can remain the same
+      view = {
+        width = 30,
+        side = "right",
+      },
+      renderer = {
+        group_empty = true,
+        icons = {
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            folder = {
+              arrow_closed = "",
+              arrow_open = "",
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+              symlink_open = "",
             },
             git = {
-                enable = true,
-                ignore = false,
-                timeout = 400,
+              unstaged = "✗",
+              staged = "✓",
+              unmerged = "",
+              renamed = "➜",
+              untracked = "★",
+              deleted = "🗑",
+              ignored = "◌",
             },
-            actions = {
-                open_file = {
-                    quit_on_open = false, -- Set to true if you want NvimTree to close when you open a file
-                },
-            },
-            -- For more options, see :help nvim-tree-setup
-        })
-    end,
+          },
+        },
+      },
+      update_focused_file = {
+        enable = true,
+        update_root = false,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = false,
+        },
+      },
+    })
+  end,
 }

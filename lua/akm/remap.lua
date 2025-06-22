@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("n","<leader>nw", ":vs<cr>:Ex<cr>")
 vim.keymap.set("n","<leader>px", ":Telescope<cr>")

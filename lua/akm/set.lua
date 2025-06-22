@@ -5,6 +5,12 @@ local g = vim.g
 local o = vim.o
 local fn = vim.fn
 
+-- Performance Tweaks
+o.ttyfast = true -- Should be set for modern terminals
+o.lazyredraw = true -- Don't redraw while executing macros, etc.
+vim.g.loaded_netrw = 1       -- Disable netrw
+vim.g.loaded_netrwPlugin = 1 -- Disable netrw plugin
+
 -- Better editing experience
 o.tabstop = 4
 o.softtabstop = 4
@@ -28,10 +34,14 @@ o.signcolumn = 'yes'
 o.encoding = 'utf-8'
 o.laststatus = 3
 g.WinSeparator_guibg = 'None'
+o.breakindent = true
+o.completeopt = 'menuone,noselect'
 
 -- Better search experience
 o.hlsearch = false
 o.incsearch = true
+o.ignorecase = true
+o.smartcase = true
 
 -- Undo and backup options
 o.swapfile = false
@@ -54,7 +64,7 @@ o.splitbelow = true
 o.foldmethod = 'indent'
 o.foldlevel = 99
 
-o.updatetime = 50
+o.updatetime = 100
 
 -- g.mapleader = " "
 
