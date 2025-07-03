@@ -1,7 +1,6 @@
--- Global helper function (if you still want to use it, otherwise remove)
 -- You'd typically call this from your init.lua or a command after plugins load.
 _G.ColorMyPencils = function(color)
-  color = color or "rose-pine-moon" -- Default if no argument
+  color = color or "catppuccin" -- Default if no argument (set to catppuccin)
   vim.cmd.colorscheme(color)
   -- Optional: make background transparent for the chosen scheme
   -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -10,6 +9,63 @@ _G.ColorMyPencils = function(color)
 end
 
 return {
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "auto", -- latte, frappe, macchiato, mocha
+        background = {
+          light = "latte",
+          dark = "mocha",
+        },
+        transparent_background = true,
+        show_end_of_buffer = false,
+        term_colors = false,
+        dim_inactive = {
+          enabled = false,
+          shade = "dark",
+          percentage = 0.15,
+        },
+        no_italic = false,
+        no_bold = false,
+        no_underline = false,
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        color_overrides = {},
+        custom_highlights = {},
+        default_integrations = true,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = false,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
+        },
+      })
+      -- setup must be called before loading
+      -- vim.cmd.colorscheme "catppuccin"
+    end,
+  },
+
   {
     "folke/tokyonight.nvim",
     lazy = false,
